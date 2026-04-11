@@ -1,0 +1,11 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod2
+  annotations:
+    description: This is my second test pod
+spec:
+  containers:
+    - name: webcont
+      image: ubuntu
+      command: [ "/bin/bash", "-c","while true; do echo Hello sumeet-singh; sleep 5; done"]
