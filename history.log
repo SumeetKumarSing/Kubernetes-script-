@@ -1,0 +1,143 @@
+    1  history | grep -i "eksctl create"
+    2  kubectl get all
+    3  eksctl create cluster --name sumeet_prod1 --region eu-central-1  --node-type t2.medium
+    4  eksctl create cluster --name sumeet-prod1 --region eu-central-1  --node-type t2.medium
+    5  yum install git -y
+    6  ls
+    7  cat pod.yml 
+    8  git clone https://github.com/SumeetKumarSing/Kubernetes-script-.git
+    9  ls -lrth 
+   10  ls -lrtha
+   11  cd Kubernetes-script-/
+   12  ls 
+   13  vi pod5.yml
+   14  clear
+   15  ls -lrtha
+   16  git status 
+   17  kubectl all nodes
+   18  kubectl get all
+   19  kubectl get nodes 
+   20  kubectl get all
+   21  kubectl get nodes  -o wide
+   22  kubectl apply -f pod5.yml
+   23  vi pod5.yml 
+   24  kubectl apply -f pod5.yml
+   25  cat pod4.yml 
+   26  cat pod5.yml 
+   27  vi pod5.yml 
+   28  kubectl apply -f pod5.yml
+   29  cat pod5.yml 
+   30  vi pod5.yml 
+   31  kubectl apply -f pod5.yml --dry-run=clinet
+   32  kubectl apply -f pod5.yml --dry-run=labelpod1
+   33  kubectl apply -f pod5.yml --dry-run=client
+   34  vi pod5.yml 
+   35  kubectl apply -f pod5.yml --dry-run=client
+   36  kubectl apply -f pod5.yml 
+   37  kubectl get pods
+   38  kubectl get pods -o wide
+   39  kubectl logs -f labelpod1
+   40  kubectl exec -it labelpod1 --/bin/bash
+   41  kubectl exec -it labelpod1 -- /bin/bash
+   42  kubectl get pods -l 
+   43  kubectl get pods - label 
+   44  kubectl get pods - l
+   45  history 
+   46  cat pod5.yml 
+   47  kubectl get pods -env
+   48  kubectl get pods - env
+   49  kubectl get all  - env
+   50  kubectl get all -l
+   51  kubectl get pods -l 
+   52  kubectl get pods -l env
+   53  kubectl get pods --show-lablels
+   54  kubectl get pods --show-lables
+   55  kubectl get pods --show-lable
+   56  kubectl get pods --show-labels
+   57  kubectl get pods -l env=dev*
+   58  kubectl get pods -l env=devloing
+   59  kubectl get pods -l env=devloping
+   60  kubectl get pods -l class=kubernetes
+   61  kubectl get pods -l class=k
+   62  kubectl get pods -l class=kubernetes
+   63  kubectl get pods labelpod1 check=nilo
+   64  clear
+   65  kubectl get nodes
+   66  kubectl get all
+   67  ls
+   68  cd Kubernetes-script-/
+   69  ls
+   70  cat pod5.yml 
+   71  kubectl get pod --show-list
+   72  kubectl get pods  --show-list
+   73  kubectl get pods  --show-labels
+   74  kubectl get pods labelpod1 -l check=meeshow
+   75  kubectl labels pods labelpod1  check=meeshow
+   76  kubectl label pods labelpod1  check=meeshow
+   77  kubectl get pods  --show-labels
+   78  clear
+   79  kubectl get pods --show-labels
+   80  kubectl label pods labelpod1 killo=kill
+   81  kubectl get pods --show-labels
+   82  kubectl label pods labelpod1 killo-
+   83  kubectl get pods --show-labels
+   84  kubectl label pods labelpod1 check-
+   85  kubectl get pods --show-labels
+   86  kubectl label pods labelpod1 class-
+   87  kubectl get pods --show-labels
+   88  kubectl apply -f pod5.yml 
+   89  kubectl get pods --show-labels
+   90  kubectl describe pods labelpod1
+   91  kubectl get all
+   92  kubectl get all -l state-type=dev
+   93  kubectl delete pods -l state-type=dev
+   94  kubectl get all -l state-type=dev
+   95  kubectl apply -f pod5.yml
+   96  kubectl get all -l state-type=dev
+   97  kubectl apply -f pod.yml
+   98  kubectl get all -l state-type=dev
+   99  kubectl get all
+  100  kubectl get all -l state-type=dev
+  101  kubectl get all -l state-type!=dev
+  102  kubectl label testpod  state-type=prod
+  103  kubectl label podstestpod  state-type=prod
+  104  kubectl label pods testpod  state-type=prod
+  105  kubectl get all --show-labels
+  106  kubectl label pods testpod class=kubernetes
+  107  kubectl get pods
+  108  kubectl get all --show-labels
+  109  kubectl get pods -l class=kubernetes
+  110  kubectl get pods -l class!=kubernetes
+  111  kubectl get pods -l state-type=dev
+  112  kubectl get pods -l state-type!=dev
+  113  kubectl get pods -l state-type!=prod
+  114  kubectl get pods -l state-type=dev
+  115  kubectl get pods -l "state-type in (dev,qa)"
+  116  kubectl get all --show-labels
+  117  kubectl get pods -l "state-type in (dev,qa)"
+  118  kubectl get pods -l "state-type notin (dev,qa)"
+  119  kubectl delete  pods -l "state-type notin (dev,prod)"
+  120  kubectl delete  pods -l "state-type in (dev,prod)"
+  121  kubectl get all
+  122  kubectl get nodes
+  123  vi node-label.yml
+  124  kubectl apply -f node-label.yml 
+  125  kubectl get all
+  126  kubectl get pods
+  127  kubectl label nodes ip-192-168-93-158.eu-central-1.compute.internal mynode=sumeet
+  128  kubectl get pods
+  129  kubectl get pods -o wide
+  130  kubectl get node -o wide
+  131  kubectl get all -l mynode=sumeet
+  132  kubectl get pods -l mynode=sumeet
+  133  kubectl get pods --show-labels
+  134  clear 
+  135  history 
+  136  cat node-label.yml
+  137  kubectl get nodes
+  138  kubectl get pods
+  139  kubectl delete -f node-label.yml 
+  140  kubectl label nodes ip-192-168-93-158.eu-central-1.compute.internal mynode-
+  141  kubectl get all
+  142  history 
+  143  history > history.log

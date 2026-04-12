@@ -1,0 +1,164 @@
+Intall ec2
+aws cli
+kubectl cli
+
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.35.2/2026-02-27/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+kubectl version --client
+[root@ip-172-31-27-35 ~]# kubectl version --client
+Client Version: v1.35.2-eks-f69f56f
+Kustomize Version: v5.7.1
+
+eksctl cli
+
+
+# for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
+
+curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+
+# (Optional) Verify checksum
+curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+
+tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+
+sudo install -m 0755 /tmp/eksctl /usr/local/bin && rm /tmp/eksctl
+
+eksctl version
+[root@ip-172-31-27-35 ~]# eksctl version
+0.225.0
+[root@ip-172-31-27-35 ~]#
+
+
+Create IAm role and attach with k8-master 
+
+Cmd:
+eksctl create cluster --name sumeet-prod --region eu-central-1 --node-type t2.medium
+
+eksctl create cluster --name sumeet_prod1 --region eu-central-1  --node-type t2.medium
+kubectl get nodes 
+kubectl get  all
+kubectl get nodes -o wide
+kubectl get all -o wide
+
+vi pod.yml
+
+kind: Pod
+apiVersion: v1
+metadata:
+	name: Testpod
+spec:
+	container:
+		name: c00
+		image: ubuntu
+		command: ["/bin/bash" , "-c", "when true; do eco "hello Sumeet from container1"; sleep 5; done"]
+		
+
+kubectl apply -f pod.yml
+
+kubectl get pods 
+
+kubectl get all
+
+kubectl get pods -o wide 
+
+kubectl describe pod testpod
+
+kubectl logs -f testpod -c c00
+
+kubectl delete -f pod.yml
+===================
+[root@ip-172-31-27-35 ~]# cat pod1.yml
+kind: Pod
+apiVersion: v1
+metadata:
+      name: testpod
+      annotations:
+        description: "This is a test pod to print hello Sumeet from container1 every 5 seconds"
+spec:
+      containers:
+        - name: c00
+          image: ubuntu
+          command: ["/bin/bash" , "-c", "while true; do echo \"hello Sumeet from container1\"; sleep 5; done"]
+[root@ip-172-31-27-35 ~]#
+==============
+kubectl exec -it testpod -c c01 -- /bin/bash
+
+kubectl get pod testpod -o yaml => to check the container details in pods 
+
+============================================================================
+eksctl delete cluster --name sumeet-prod --region eu-central-1;shutdown -h now
+
+kubectl get all
+
+vi pod5.yml
+===================================
+[root@ip-172-31-27-35 Kubernetes-script-]# cat pod5.yml
+kind: Pod
+apiVersion: v1
+metadata:
+  name: labelpod1
+  annotations:
+    description: Tis pod we will define our label along with env in container
+  labels:
+      state-type: dev
+      class: kubernetes
+spec:
+  containers:
+    - name: resources
+      image: ubuntu
+      command: [ "/bin/bash", "-c", "while true; do echo 'hello from my $MYNAME '; sleep 5; done"]
+      env:
+        - name: MYNAME
+          value: devloping
+
+==================================
+cmd:
+
+kubectl apply -f pod5.yml --dry-run=client
+
+kubectl apply -f pod5.yml 
+kubectl get pods --show-labels
+kubectl label pods labelpod1 killo=kill
+
+kubectl get pods --show-labels
+
+kubectl delete pods -l state-type=dev
+
+kubectl get pods -l state-type!=dev is same kubectl get pods -l state-type!=prod
+
+kubectl get pods -l "state-type in (dev,qa)"
+
+kubectl get pods -l "state-type notin (dev,qa)"
+
+vi node-label.yml
+================
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nodelabelpod
+  annotations:
+    description: Tis pod we will define our label along with env in container
+  labels:
+      state-type: dev
+      class: kubernetes
+spec:
+  containers:
+    - name: resources
+      image: ubuntu
+      command: [ "/bin/bash", "-c", "while true; do echo 'hello from my $MYNAME '; sleep 5; done"]
+      env:
+        - name: MYNAME
+          value: devloping
+  nodeSelector:
+    mynode: sumeet
+	====================
+kubectl get pods
+kubectl label nodes ip-192-168-93-158.eu-central-1.compute.internal mynode=sumeet
+kubectl get pods -o wide
+
+kubectl delete -f node-label.yml
+
+kubectl label nodes ip-192-168-93-158.eu-central-1.compute.internal mynode-

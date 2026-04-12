@@ -1,0 +1,19 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nodelabelpod
+  annotations:
+    description: Tis pod we will define our label along with env in container
+  labels:
+      state-type: dev
+      class: kubernetes
+spec:
+  containers:
+    - name: resources
+      image: ubuntu
+      command: [ "/bin/bash", "-c", "while true; do echo 'hello from my $MYNAME '; sleep 5; done"]
+      env:
+        - name: MYNAME
+          value: devloping
+  nodeSelector:
+    mynode: sumeet
