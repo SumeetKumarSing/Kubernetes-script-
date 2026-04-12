@@ -162,3 +162,4 @@ kubectl get pods -o wide
 kubectl delete -f node-label.yml
 
 kubectl label nodes ip-192-168-93-158.eu-central-1.compute.internal mynode-
+hello.txt
