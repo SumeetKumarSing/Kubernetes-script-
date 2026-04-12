@@ -237,3 +237,62 @@ kubectl  describe rs myrepicaset
 
 kubectl scale --replicas=3 ReplicaSet/myrepicaset
 
+======================
+vi deployment.yml
+# Deployment will auto run relicateset which benifit of versioning . We can rollback to from old version to new and vive versa
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mydeployment
+
+spec:
+  replicas: 1
+  selectors:
+    matchLabels:
+      objecttype: deployment 
+  
+  template:
+    metadata:
+      labels: 
+        objecttype: deployment
+    spec:
+     containers:
+       - name: c00
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; do echo 'Hello from deployment containers:'; done "]
+
+kubectl apply -f deployment.yml
+kubectl apply -f deployment.yml
+kubectl scale  --replicas=3 deployment.apps/mydeployment
+vi deployment.yml
+# Deployment will auto run relicateset which benifit of versioning . We can rollback to from old version to new and vive versa
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mydeployment
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      objecttype: deployment
+
+  template:
+    metadata:
+      labels:
+        objecttype: deployment
+    spec:
+     containers:
+       - name: c00
+         image: debian
+         command: ["/bin/bash", "-c", "while true; do echo 'Hello from deployment debian containers:'; done "]
+		 
+		 
+
+kubectl apply -f deployment.yml
+kubectl apply -f deployment.yml
+kubectl rollout undo deployment.apps/mydeployment
+kubectl apply -f deployment.yml
+

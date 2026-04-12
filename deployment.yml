@@ -1,0 +1,22 @@
+# Deployment will auto run relicateset which benifit of versioning . We can rollback to from old version to new and vive versa
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mydeployment
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      objecttype: deployment 
+  
+  template:
+    metadata:
+      labels: 
+        objecttype: deployment
+    spec:
+     containers:
+       - name: c00
+         image: debian
+         command: ["/bin/bash", "-c", "while true; do echo 'Hello from deployment debian containers:'; done "]
