@@ -1,0 +1,21 @@
+# ReplicationController will use for auto healing and scaling in old ways as it's support only = and != not  selction muliple label(set-bas
+
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: myrepicatcontrollerset
+
+spec:
+  replicas: 2
+  selector:
+    myname: sumeet
+
+  template:
+    metadata:
+      labels: 
+        myname: sumeet
+    spec:
+      containers:
+        - name: c00
+          image: debian
+          command: ["/bin/bash", "-c", " while true ; do echo 'hello from ReplicationController  debian containers' ; done "]

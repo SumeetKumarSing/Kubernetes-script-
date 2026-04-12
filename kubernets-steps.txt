@@ -162,4 +162,78 @@ kubectl get pods -o wide
 kubectl delete -f node-label.yml
 
 kubectl label nodes ip-192-168-93-158.eu-central-1.compute.internal mynode-
-hello.txt
+
+========================
+eksctl create cluster --name sumeet-uat --region  eu-central-1  --node-type t2.medium
+
+kubectl get nodes
+kubectl get all
+vi rc.yml
+==============
+# ReplicationController will use for auto healing and scaling in old ways as it's support only = and != not  selction muliple label
+
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: myrepicat-controller-set
+
+spec:
+  replica: 2
+  selector:
+  myname: sumeet
+
+  template:
+    metadata:
+      labels: 
+        myname: sumeet
+    spec:
+      containers:
+        - name: c00
+          image: ubuntu
+          command: ["/bin/bash", "-c", "while true; do echo'helolo from ReplicationController containers'; done "]
+====================
+kubectl apply -f rc.yml
+
+kubectl get all
+
+kubectl get pods
+
+kubectl get rc
+
+kubectl  describe rc myrepicat-controller-set
+
+kubectl scale --replicas=3 replicationcontroller/myrepicatcontrollerset
+
+vi rs.yml
+======
+# Repliset will use for auto healing and scaling in new  ways as it's support = and !=   selction muliple label(set-bas)
+
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: myrepicaset
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      myname: sumeet
+
+  template:
+    metadata:
+      labels:
+        myname: sumeet
+    spec:
+      containers:
+        - name: c01
+          image: debian
+          command: ["/bin/bash", "-c", " while true ; do echo 'hello from ReplicaSet  debian containers' ; done "]
+=========
+kubectl get pods
+
+kubectl get rs
+
+kubectl  describe rs myrepicaset
+
+kubectl scale --replicas=3 ReplicaSet/myrepicaset
+

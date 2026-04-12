@@ -1,0 +1,22 @@
+# Repliset will use for auto healing and scaling in new  ways as it's support = and !=   selction muliple label(set-bas)
+
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: myrepicaset
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      myname: sumeet
+
+  template:
+    metadata:
+      labels: 
+        myname: sumeet
+    spec:
+      containers:
+        - name: c01
+          image: debian
+          command: ["/bin/bash", "-c", " while true ; do echo 'hello from ReplicaSet  debian containers' ; done "]
