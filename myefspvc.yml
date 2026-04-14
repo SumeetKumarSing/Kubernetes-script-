@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: myefspvclaim01
+
+spec:
+  volumeName: myefspv01
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
