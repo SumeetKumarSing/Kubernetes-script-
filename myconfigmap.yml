@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: myvolconfigmap
+
+spec:
+  containers:
+   - name: c00
+     image: debian
+     command: ["/bin/bash", "-c", "while true; do echo 'Hello from deployment debian containers:'; done "]
+     volumeMounts:
+       - name: testonfigmap
+         mountPath: "/tmp/config"
+
+  volumes:
+  - name: testonfigmap
+    configMap:
+     name: mymap
+     items:
+     - key: samplefile
+       path: samplefile
