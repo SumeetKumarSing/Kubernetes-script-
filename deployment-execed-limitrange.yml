@@ -1,0 +1,25 @@
+# tis will not work with limitrange script as it min value is more then set in limitrange yml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mydeployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      objecttype: deployment
+
+  template:
+    metadata:
+      labels:
+        objecttype: deployment
+    spec:
+     containers:
+       - name: c00
+         image: debian
+         command: ["/bin/bash", "-c", "while true; do echo 'Hello from deployment debian containers:'; done "]
+
+         resources:
+          requests:
+            cpu: "400m"
+            memory: "400Mi"
