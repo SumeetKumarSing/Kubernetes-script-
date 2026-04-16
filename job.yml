@@ -1,0 +1,14 @@
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: myjob
+spec:
+  template:
+    metadata:
+     name: testjob
+    spec:
+      containers:
+        - name: webcont
+          image: ubuntu
+          command: [ "/bin/bash", "-c","echo 'Hello sumeet-singh'; sleep 10"]
+      restartPolicy: Never
